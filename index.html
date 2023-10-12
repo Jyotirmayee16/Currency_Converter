@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="converter">
+        <h2>Currency Converter</h2>
+        <div class="input">
+            <input type="number" id="amount" placeholder="Enter amount">
+            <select id="fromCurrency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="JPY">JPY</option>
+                <!-- Add more currency options here -->
+            </select>
+        </div>
+        <div class="input">
+            <input type="number" id="result" placeholder="Result" disabled>
+            <select id="toCurrency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="JPY">JPY</option>
+                <!-- Add more currency options here -->
+            </select>
+        </div>
+        <button id="convert">Convert</button>
+    </div>
+
+    <script>
+        const currencyData = {
+            USD: 1,
+            EUR: 0.86,
+            JPY: 113.14,
+            // Add more currency exchange rates here
+        };
+
+        const convertButton = document.getElementById("convert");
+        convertButton.addEventListener("click", () => {
+            const amount = parseFloat(document.getElementById("amount").value);
+            const fromCurrency = document.getElementById("fromCurrency").value;
+            const toCurrency = document.getElementById("toCurrency").value;
+            const resultElement = document.getElementById("result");
+
+            if (!isNaN(amount)) {
+                const convertedAmount = amount * (currencyData[toCurrency] / currencyData[fromCurrency]);
+                resultElement.value = convertedAmount.toFixed(2);
+            } else {
+                resultElement.value = "Invalid input";
+            }
+        });
+    </script>
+</body>
+</html>
